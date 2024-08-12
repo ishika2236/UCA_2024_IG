@@ -1,0 +1,23 @@
+//iterative or recursive
+//better approach to do iterative approach : coz of stack overflow
+// number of recursive calls is equal to log(n)
+// number of levels in recursion tree is log(n)+1
+// how many subproblems are there at a level j?
+// ====> 2^j
+//what is the size of each subproblem?
+// ====> (n/2)^j
+
+
+//recursion tree
+/*
+                    n
+
+            n/2               n/2
+
+        n/4     n/4        n/4      n/4
+
+
+
+*/
+// at each level the complexity of merge operation is O(n/(2^j)*2^j)= O(n)
+// total number of levels = log(n)..therefore complexity of merge sort at all levels is equal to nlog(n)
