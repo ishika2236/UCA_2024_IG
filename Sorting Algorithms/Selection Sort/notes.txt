@@ -1,0 +1,17 @@
+// good coding practices
+// ==> leave space between operand and operators.
+// ==> leave a line between declaration of variables and rest of the code. 
+// ==> for block statements, write code properly inside curly braces
+// ==> leave space between include and <stdio.h>
+// ==> write test cases
+
+
+/* 
+   ques: why use assert.h?
+   for more automation, less manual intervention.. we are able to generate a system in which compilation, build , testing, etc everything occurs in a seamless manner. With this automation, even if a test case fails, developers get notification about that as mail. 
+   assert.h provides a way to perform runtime assertions. Assertions are debugging aid that can help catch and diagnose errors by verifying that certain conditions stay true during execution. when an assertion fails, program is terminated and result is printed. 
+*/
+
+//selection sort Complexities
+//time complexity : O(n^2)
+//space complexity : O(1)
