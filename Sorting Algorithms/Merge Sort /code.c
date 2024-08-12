@@ -1,4 +1,4 @@
-include<stdlib.h>
+#include<stdlib.h>
 #include<stdio.h>
 
 void merge(int * aux, int arr[], int left, int mid, int right)
