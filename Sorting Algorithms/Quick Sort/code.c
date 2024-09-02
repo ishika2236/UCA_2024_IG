@@ -53,3 +53,50 @@ int partition (int start, int end, int arr[], int pivot_type)
   return i;
   
 }
+
+int main()
+{
+  int n = 1000;
+  int arr[n];
+  clock_t start, end;
+  double cpu_time_used;
+
+  srand(time(NULL));
+
+  for(int i = 0 ; i < 1000; i++)
+    {
+      arr[i] = rand() % 1000;
+    }
+  int arr1[n], arr2[n], arr3[n];
+  for(int i = 0 ; i < n; i++)
+    {
+      arr1[i] = arr[i];
+      arr2[i] = arr[i];
+      arr3[i] = arr[i];
+    }
+
+   // Test pivot as middle element
+    start = clock();
+    quicksort(arrCopy1, 0, n - 1, 0);
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time with middle pivot: %f seconds\n", cpu_time_used);
+
+
+  // Test pivot as first element
+    start = clock();
+    quicksort(arrCopy2, 0, n - 1, 1);
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time with first pivot: %f seconds\n", cpu_time_used);
+
+    // Test pivot as random element
+    start = clock();
+    quicksort(arrCopy3, 0, n - 1, 2);
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Time with random pivot: %f seconds\n", cpu_time_used);
+
+    return 0;
+}
+  
