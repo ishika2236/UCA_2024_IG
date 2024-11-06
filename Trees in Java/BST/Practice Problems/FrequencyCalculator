@@ -1,0 +1,86 @@
+//reference text file: https://introcs.cs.princeton.edu/java/data/leipzig/leipzig1m.txt
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class FrequencyCalculator {
+    public static class Node {
+        Integer value;
+        String key;
+        Node left;
+        Node right;
+
+        Node(String key, Integer value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    static Node root;
+
+    public static Integer get(String key) {
+        return getPrivate(root, key);
+    }
+
+    private static Integer getPrivate(Node root, String key) {
+        if (root == null) return null;
+        int result = key.compareTo(root.key);
+        if (result == 0) return root.value;
+        else if (result < 0) return getPrivate(root.left, key);
+        else return getPrivate(root.right, key);
+    }
+
+    public static void put(String key) {
+        root = putPrivate(root, key);
+    }
+
+    private static Node putPrivate(Node root, String key) {
+        if (root == null) return new Node(key, 1);
+        int result = key.compareTo(root.key);
+        if (result == 0) {
+            root.value += 1; 
+            return root; 
+        }
+        if (result < 0) {
+            root.left = putPrivate(root.left, key); 
+        } else {
+            root.right = putPrivate(root.right, key);
+        }
+        return root; 
+    }
+
+    static Integer maxlen = 0;
+    static String maxWord = null; 
+
+    public static void traversal(Node root) {
+        if (root == null) return;
+        if (root.value > maxlen) {
+            maxlen = root.value;
+            maxWord = root.key;
+        }
+        traversal(root.left);
+        traversal(root.right);
+    }
+
+    public static void main(String args[]) {
+        long startTime = System.nanoTime();
+        File file = new File("./leipzig1m.txt.1");
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                String word = scanner.next();
+                if (word.length() >= 10) {
+                    put(word);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+        traversal(root);
+
+        System.out.println(maxWord + " " + maxlen);
+        
+        long endTime = System.nanoTime();
+        double duration = (endTime - startTime)/1_000_000_000.0;
+        System.out.println("Execution time: " + duration + " seconds");
+    } 
+}
